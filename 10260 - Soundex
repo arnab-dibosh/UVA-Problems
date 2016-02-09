@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+    int alphabet[26], i;
+    char ch[20];
+
+    for(i=0; i<26; i++)
+    {
+        switch (i)
+        {
+        case 1: case 5: case 15: case 21:
+            alphabet[i]=1;
+            break;
+        case 2: case 6: case 9: case 10: case 16: case 18: case 23: case 25:
+            alphabet[i]=2;
+            break;
+        case 3: case 19:
+            alphabet[i]=3;
+            break;
+        case 11:
+            alphabet[i]=4;
+            break;
+        case 12: case 13:
+            alphabet[i]=5;
+            break;
+        case 17:
+            alphabet[i]=6;
+            break;
+        default:
+            alphabet[i]=0;
+            break;
+        }
+    }
+
+    while(scanf("%s", ch)==1)
+    {
+        for(i=0; i<strlen(ch); i++)
+        {
+            int soundexCode=alphabet[ch[i]-65];
+
+            if(i>0 && soundexCode==alphabet[ch[i-1]-65])
+                continue;
+            else if(soundexCode>0)
+                printf("%d", soundexCode);
+        }
+      printf("\n");
+    }
+    return 0;
+}
