@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdbool.h>
+
+void main()
+{
+    char word[50];
+
+    while(gets(word))
+    {
+        int sum=0, i=0,factor=0, value=0;
+        bool isPrime=true;
+        for(i=0; i<strlen(word); i++)
+        {
+            value=word[i];
+            factor=value>96? 96: 38;
+            sum+=(value-factor);
+        }
+
+        for(i=2; i<=sqrt(sum); i++)
+        {
+            if(sum%i==0)
+            {
+                isPrime=false;
+                break;
+            }
+        }
+
+        if(isPrime)
+            printf("It is a prime word.\n");
+        else
+            printf("It is not a prime word.\n");
+    }
+}
