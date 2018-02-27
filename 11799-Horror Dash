@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int t, n, max, i, j, v;
+
+    scanf("%d", &t);
+
+    for(i=0; i<t; i++){
+        max=0;
+        scanf("%d", &n);
+
+        for(j=0; j<n; j++){
+
+            scanf("%d", &v);
+
+            if(v>max) max=v;
+        }
+        printf("Case %d: %d\n",i+1, max);
+    }
+    return 0;
+}
