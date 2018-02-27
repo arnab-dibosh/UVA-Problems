@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    long long b, p, a[1000];
+    int h, n, w, i, j;
+
+    while(scanf("%d %lld %d %d", &n, &b, &h, &w)==4){
+        long long cost=999999999;
+         for(i=1; i<=h; i++)
+            {
+                int hasHotel=0;
+                scanf("%lld", &p);
+
+                for(j=1; j<=w; j++)
+                {
+                    scanf("%lld", &a[j]);
+
+                    if(a[j]>=n) hasHotel=1;
+                }
+
+                if(hasHotel && n*p<=b && n*p<cost){
+                    cost=n*p;
+                }
+            }
+
+            if(cost<999999999){
+                printf("%lld\n", cost);
+            }else{
+                printf("stay home\n");
+            }
+    }
+
+    return 0;
+}
