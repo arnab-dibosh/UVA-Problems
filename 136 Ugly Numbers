@@ -1,0 +1,36 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+    int i=1, n=0;
+    int arr[50];
+    while(cin>> n)
+    {
+        if(n==0) break;
+        
+        int total=0, ans=0;
+
+        cout<< "Set #" << i++ << endl;
+
+        for(int j=0; j<n; j++)
+        {
+            int wall;
+            cin>>wall;
+
+            total+=wall;
+            arr[j]=wall;
+        }
+        int avg=total/n;
+
+        for(int j=0; j<n; j++)
+        {
+            if(arr[j]>avg) ans+=(arr[j]-avg);
+        }
+
+        cout<< "The minimum number of moves is " << ans<< "." << endl<< endl;
+    }
+
+    return 0;
+}
