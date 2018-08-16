@@ -1,0 +1,25 @@
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+
+int main()
+{
+
+    char s[100];
+
+    while(gets(s))
+    {
+        if(s[0]=='0') break;
+        
+        long sum=0;
+        int n=strlen(s), num=0;
+
+        for(int i=0; i<n; i++)
+        {
+            num=s[i]-'0';
+            sum+= num*(pow(2, n-i)-1);
+        }
+        printf("%d\n", sum);
+    }
+}
