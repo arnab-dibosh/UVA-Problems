@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int n=0, from=0, to=0;
+
+    cin>>n;
+
+    for(int i=0; i<n; i++)
+    {
+        int maxd=0, result=0;
+        cin>> from >> to;
+
+        for(int j=from; j<=to; j++)
+        {
+            int localmaxd=1, sqrtValue;
+
+            sqrtValue=sqrt(j);
+
+            for(int k=2; k<= sqrtValue; k++)
+            {
+                if(j%k==0) localmaxd++;
+            }
+
+            if(sqrtValue==sqrt(j))
+                localmaxd=(localmaxd*2)-1;
+            else
+                localmaxd=localmaxd*2;
+
+            if(localmaxd>maxd)
+            {
+                maxd=localmaxd;
+                result=j;
+            }
+        }
+        printf("Between %d and %d, %d has a maximum of %d divisors.\n", from, to, result, maxd);
+    }
+
+
+    return 0;
+}
