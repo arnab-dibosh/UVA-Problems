@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+long reverseNum(long n);
+
+int main()
+{
+    int t=0;
+    long n=0;
+
+    cin>> t;
+
+    for(int i=0; i<t; i++)
+    {
+        cin >> n;
+
+        int c=0;
+        long rev=reverseNum(n);
+
+        while(n!=rev)
+        {
+            n+=rev;
+            rev=reverseNum(n);
+            c++;
+        }
+        printf("%d %ld\n", c, n);
+
+    }
+
+
+    return 0;
+}
+
+long reverseNum(long n)
+{
+    long rev=0;
+
+    while(n>0)
+    {
+        rev=rev*10+n%10;
+        n/=10;
+    }
+
+    return rev;
+}
+
+
+
