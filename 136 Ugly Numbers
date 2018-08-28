@@ -1,36 +1,44 @@
-#include<iostream>
+//136 Ugly Numbers
 
-using namespace std;
+#include<bits/stdc++.h>
+
+int isUgly(int n);
 
 int main()
 {
-    int i=1, n=0;
-    int arr[50];
-    while(cin>> n)
+    int n=1500;
+    int i = 1;
+    int c = 1;
+
+    while (n > c)
     {
-        if(n==0) break;
-        
-        int total=0, ans=0;
+        i++;
 
-        cout<< "Set #" << i++ << endl;
-
-        for(int j=0; j<n; j++)
+        if (isUgly(i))
         {
-            int wall;
-            cin>>wall;
-
-            total+=wall;
-            arr[j]=wall;
-        }
-        int avg=total/n;
-
-        for(int j=0; j<n; j++)
-        {
-            if(arr[j]>avg) ans+=(arr[j]-avg);
+            c++;
         }
 
-        cout<< "The minimum number of moves is " << ans<< "." << endl<< endl;
     }
 
-    return 0;
+    printf("The %d'th ugly number is %d.", c, i);
+
+
+	return 0;
 }
+
+int divide(int n, int div)
+{
+    while (n%div == 0) n = n/div;
+    return n;
+}
+
+int isUgly(int n)
+{
+    n = divide(n, 2);
+    n = divide(n, 3);
+    n = divide(n, 5);
+
+    return (n == 1)? 1 : 0;
+}
+
