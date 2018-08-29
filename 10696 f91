@@ -1,0 +1,25 @@
+//10696 f91
+
+#include<bits/stdc++.h>
+
+int mc91(int n);
+
+int main()
+{
+    int n=0, o=0;
+
+    while(scanf("%d", &n))
+    {
+        if(n==0) break;
+
+        if(n<=100) o=91;
+        else o=n-10;
+
+        printf("f91(%d) = %d\n", n, o);
+    }
+
+
+	return 0;
+}
+
+
