@@ -1,0 +1,18 @@
+//113 Power of Cryptography
+
+#include<bits/stdc++.h>
+
+int main()
+{
+    double p=0, b=0, n=0;
+
+     while(scanf("%lf \n %lf", &p, &n)!=EOF)
+     {
+        b=pow(n, 1/p);
+        printf("%.0lf\n", b);
+     }
+
+	return 0;
+}
+
+
