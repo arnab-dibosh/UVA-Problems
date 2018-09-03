@@ -1,0 +1,146 @@
+//101 The Blocks Problem
+#include <stdio.h>
+#include <string.h>
+
+int returnTopI(int i, int j);
+void returnOver(int i, int j);
+int findPos(int n);
+
+int arr[25][25];
+int t=0, _x=0, _y=0, printAll=0;
+
+int findPos(int n)
+{
+    int stop=0;
+    for(int i=0; i<t && stop==0; i++)
+    {
+        for(int j=0; j<t; j++)
+        {
+            if(arr[i][j]==n)
+            {
+                _x=i;
+                _y=j;
+                stop=1;
+                break;
+            }
+        }
+    }
+    return 0;
+}
+
+void returnOver(int i, int j)
+{
+    for(int y=j+1; arr[i][y]!=-1; y++)
+    {
+        int val=arr[i][y];
+        arr[val][0]=val;
+        arr[i][y]=-1;
+    }
+}
+
+int returnTopI(int i, int j)
+{
+    int y=j+1;
+    for(y=j+1; arr[i][y]!=-1; y++)
+    {}
+
+    return --y;
+ }
+
+int main()
+{
+   char cmd[25], mv[10], on[10];
+
+   int tp=0, bt=0;
+
+   scanf("%d", &t);
+
+   for(int i=0; i<25; i++)
+   {
+       for(int j=0; j<t; j++)
+           arr[i][j]=-1;
+           
+       arr[i][0]=i;       
+   }
+
+   while(gets(cmd))
+   {
+      sscanf(cmd, "%s %d %s %d", &mv, &tp, &on, &bt);
+      if(tp==bt) continue;
+      if(strcmp(mv,"quit")==0)
+		  break;
+
+	  int tpx=0, tpy=0, btx=0, bty=0;
+
+	  findPos(tp);
+	  tpx= _x;
+	  tpy= _y;
+	  findPos(bt);
+
+	  btx= _x;
+	  bty= _y;
+	  
+	  
+	  if(tpx==btx) continue;
+
+	   if(strcmp(mv, "move")==0)
+       {
+            returnOver(tpx, tpy);
+            if(strcmp(on, "onto")==0)
+            {
+                returnOver(btx, bty);
+                arr[btx][bty+1]=arr[tpx][tpy];
+                arr[tpx][tpy]=-1;
+                if(bty<23)
+                    arr[btx][bty+2]=-1;
+            }
+            else if(strcmp(on, "over")==0)
+            {
+                bty=returnTopI(btx, bty);
+                arr[btx][bty+1]=arr[tpx][tpy];
+                arr[tpx][tpy]=-1;
+                if(bty<23)
+                    arr[btx][bty+2]=-1;
+            }
+       }
+       else if(strcmp(mv, "pile")==0)
+       {
+             if(strcmp(on, "onto")==0)
+            {
+                returnOver(btx, bty);
+                
+                for(tpy; arr[tpx][tpy]!=-1 && tpx<t && tpy<t; tpy++)
+                {
+                    arr[btx][++bty]=arr[tpx][tpy];
+                    arr[tpx][tpy]=-1;
+                }
+                arr[btx][++bty]=-1;
+            }
+            else if(strcmp(on, "over")==0)
+            {
+                bty=returnTopI(btx, bty);
+                for(tpy; arr[tpx][tpy]!=-1 && tpx<t && tpy<t; tpy++)
+                {
+                    arr[btx][++bty]=arr[tpx][tpy];
+                    arr[tpx][tpy]=-1;
+                }
+                arr[btx][++bty]=-1;
+            }
+       }
+   }
+
+     for(int i=0; i<t; i++)
+       {
+           printf("%d:", i);
+           for(int j=0; j<t; j++)
+           {
+               if(arr[i][j]==-1) break;
+               printf(" %d", arr[i][j]);
+           }
+           printf("\n");
+       }
+
+	return 0;
+}
+
+
