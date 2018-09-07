@@ -1,0 +1,17 @@
+//10079	Pizza Cutting
+#include <stdio.h>
+
+int main()
+{
+    long long n=0;
+
+    while(scanf("%lli", &n))
+    {
+        if(n<0) break;
+
+        n=(n*(n+1))/2;
+
+        printf("%lli\n", n+1);
+    }
+    return 0;
+}
