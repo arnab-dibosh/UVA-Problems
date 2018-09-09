@@ -1,0 +1,24 @@
+//11172 - Relational Operator
+#include<bits/stdc++.h>
+
+int main()
+{
+    long t=0, a=0, b=0;
+
+    scanf("%ld", &t);
+
+    while(t--)
+    {
+        scanf("%ld%ld", &a, &b);
+        char r;
+
+        if(a>b) r='>';
+        else if(a<b) r='<';
+        else if(a==b) r='=';
+
+        printf("%c\n", r);
+    }
+
+    return 0;
+}
+
