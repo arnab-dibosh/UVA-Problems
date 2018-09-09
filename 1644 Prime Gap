@@ -1,0 +1,48 @@
+//1644 Prime Gap
+#include<bits/stdc++.h>
+int sieve(int n);
+int primes[1299800]={0};
+int main()
+{
+    int n=0;
+    sieve(1299709);
+
+    while(scanf("%d", &n))
+    {
+        if(n==0) break;
+        int r=0;
+
+        if(primes[n]==0)
+            printf(0);
+        else
+        {
+            int tmp=n;
+            while(tmp--)
+            {
+                r++;
+                if(primes[tmp]==0) break;
+            }
+            while(n++)
+            {
+                r++;
+                if(primes[n]==0) break;
+            }
+        }
+        printf("%d\n", r);
+    }
+    return 0;
+}
+
+
+int sieve(int n)
+{
+    for(int i=2; i*i<n; i++)
+    {
+        if(primes[i]==0)
+        {
+            for(int j=i*2; j<=n; j+=i)
+                primes[j]=1;
+        }
+    }
+    return 0;
+}
