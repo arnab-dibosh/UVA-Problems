@@ -1,0 +1,30 @@
+//11875 - Brick Game
+#include<bits/stdc++.h>
+
+int main()
+{
+   int t=0, c=0;
+   scanf("%d", &t);
+
+   while(t--)
+   {
+       int i=0, j=0, n=0;
+       scanf("%d", &i);
+       i/=2;
+       c++;
+
+       while(1)
+       {
+           scanf("%d", &n);
+            if(j++==i)
+            {
+                printf("Case %d: %d\n", c, n);
+                scanf("%*[^\n]s");
+                break;
+            }
+       }
+
+   }
+    return 0;
+}
+
