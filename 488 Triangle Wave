@@ -1,0 +1,39 @@
+//488 Triangle Wave
+#include<bits/stdc++.h>
+
+int main()
+{
+     int t=0, sp=0;
+     scanf("%d", &t);
+
+     while(t--)
+     {
+         int a=0, f=0;
+         scanf("%d", &a);
+         scanf("%d", &f);
+         if(sp++>0) printf("\n");
+
+         for(int i=0; i<f; i++)
+         {
+             if(i>0) printf("\n");
+             int h=1, peak=0;
+             while(h)
+             {
+                 for(int v=1; v<=h; v++)
+                     printf("%d", h);
+
+                 printf("\n");
+
+                 if(h==a || peak==1)
+                 {
+                    peak=1;
+                    h--;
+                 }
+                 else h++;
+             }
+         }
+     }
+
+    return 0;
+}
+
