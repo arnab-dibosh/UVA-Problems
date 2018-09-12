@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    string sub, main;
+
+    while(cin>> sub>> main)
+    {
+        int i=0, j=0;
+        int l=sub.length();
+
+        while(i<l)
+        {
+            char c=sub[i];
+            while(j<main.length())
+            {
+                if(main[j]==c)
+                {
+                    j++;
+                    i++;
+                    break;
+                }
+                j++;
+            }
+            if(j==main.length()) break;
+        }
+
+        if(i==l) printf("Yes\n");
+        else printf("No\n");
+    }
+
+    return 0;
+}
+
