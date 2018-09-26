@@ -1,0 +1,57 @@
+//352 The Seasonal War
+#include <bits/stdc++.h>
+using namespace std;
+
+int dx[8]={0,0,1,-1,1,1,-1,-1};
+int dy[8]={1,-1,0,0,1,-1,1,-1};
+
+string str[25];
+int n, c=1, countOfComponent = 0, vis[25][25];
+
+void dfs(int r,int c)
+{
+    vis[r][c] = 1;
+
+    for(int i=0; i<8; i++)
+    {
+        int tr = r + dx[i];
+        int tc = c + dy[i];
+
+        if(tr>=0 && tr<n && tc>=0 && tc<n)
+        {
+            if(vis[tr][tc] == 0)
+            {
+                if(str[tr][tc] == '1') dfs(tr,tc);
+            }
+        }
+    }
+}
+
+int main()
+{
+    while(cin>> n)
+    {
+        countOfComponent=0;
+        for(int i=0; i<n; i++)
+        {
+            for(int j=0; j<n; j++)
+                vis[i][j]=0;
+        }
+
+        for(int i=0; i<n; i++) cin>> str[i];
+
+        for(int i=0; i<n; i++)
+        {
+            for(int j=0; j<n; j++)
+            {
+                if(!vis[i][j] && str[i][j] == '1')
+                {
+                    countOfComponent ++;
+                    dfs(i,j);
+                }
+            }
+        }
+        cout<<"Image number "<<c++<<" contains "<<countOfComponent<<" war eagles."<<endl;
+    }
+    return 0;
+}
