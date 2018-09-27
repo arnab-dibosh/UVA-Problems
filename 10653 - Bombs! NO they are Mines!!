@@ -1,0 +1,73 @@
+//10653 - Bombs! NO they are Mines!!
+#include <bits/stdc++.h>
+#define MAX_LEN 1000
+using namespace std;
+int bfs(int sx, int sy, int dx, int dy);
+
+int vis[MAX_LEN][MAX_LEN]={0}, dis[MAX_LEN][MAX_LEN]={-1}, r=0, c=0;
+int x[]={1, 0, 0, -1};
+int y[]={0, 1, -1, 0};
+int main()
+{
+    int tb=0, b=0, v=0, ri=0;
+    while(cin>> r>> c)
+    {
+        if(!r) break;
+        for(int i=0; i< MAX_LEN; i++)
+        {
+            for(int j=0; j<MAX_LEN; j++)
+            {
+                vis[i][j]=0;
+                dis[i][j]=-1;
+            }
+        }
+        cin>> tb;
+        while(tb--)
+        {
+            cin>> ri>> b;
+            for(int i=0; i<b; i++)
+            {
+                cin>> v;
+                vis[ri][v]=1;
+            }
+        }
+        int sx, sy, dx, dy;
+        cin>> sx>> sy;
+        cin>> dx>> dy;
+        int d=bfs(sx, sy, dx, dy);
+        printf("%d\n", d);
+    }
+
+    return 0;
+}
+
+int bfs(int sx, int sy, int dx, int dy)
+{
+    vis[sx][sy]=1;
+    dis[sx][sy]=0;
+    queue<pair<int, int> > q;
+
+    q.push(make_pair(sx, sy));
+    while(!q.empty())
+    {
+        pair<int, int> p=q.front();
+        int cx=0, cy=0;
+        q.pop();
+        for(int i=0; i<=3; i++)
+        {
+            cx=p.first+x[i];
+            cy=p.second+y[i];
+
+            if(cx<0 || cx>=r || cy<0 || cy>=c) continue;
+            if(!vis[cx][cy])
+            {
+                q.push(make_pair(cx, cy));
+                dis[cx][cy]=dis[p.first][p.second]+1;
+                vis[cx][cy]=1;
+
+                if(cx==dx && cy==dy) return dis[cx][cy];
+            }
+        }
+    }
+    return -1;
+}
