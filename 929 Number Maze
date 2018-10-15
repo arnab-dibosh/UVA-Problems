@@ -1,0 +1,85 @@
+#include <bits/stdc++.h>
+#define Max_Size 1000
+int Dikjstra(int r, int c);
+using namespace std;
+
+int maze[Max_Size][Max_Size], dis[Max_Size][Max_Size];
+
+struct edge{
+    int x, y, w;
+
+    bool operator<(const edge& x) const
+    {
+        return w<x.w;
+    }
+};
+int main()
+{
+    int t, cst=0;
+    cin>>t;
+
+    while(t--)
+    {
+        int r, c;
+        cin>>r;
+        cin>>c;
+
+        for(int i=0; i<r; i++)
+        {
+            for(int j=0; j<c; j++)
+                cin>>maze[i][j];
+        }
+        cst=Dikjstra(r, c);
+        cout<<cst<<endl;
+    }
+    return 0;
+}
+
+int Dikjstra(int r, int c)
+{
+    int dx[]={1, -1, 0, 0};
+    int dy[]={0, 0, -1, 1};
+    multiset<edge> st;
+    edge pare;
+    for(int i=0; i<r; i++)
+    {
+        for(int j=0; j<c; j++)
+            dis[i][j]=INT_MAX;
+    }
+
+    dis[0][0]=maze[0][0];
+    pare.x=0;
+    pare.y=0;
+    pare.w=maze[0][0];
+    st.insert(pare);
+
+    while(!st.empty())
+    {
+        pare=*st.begin();
+        int parx=pare.x;
+        int pary=pare.y;
+        st.erase(st.begin());
+
+        if(parx==r-1 && pary==c-1) return dis[parx][pary];
+        for(int i=0; i<4; i++)
+        {
+            int cx=pare.x+dx[i], cy=pare.y+dy[i];
+
+            if(cx>-1 && cx<r && cy>-1 && cy<c)
+            {
+                if(dis[parx][pary]+ maze[cx][cy]<dis[cx][cy])
+                {
+                    dis[cx][cy]=dis[parx][pary]+ maze[cx][cy];
+                    if(cx==r-1 && cy==c-1) return dis[cx][cy];
+                    edge che;
+                    che.x=cx;
+                    che.y=cy;
+                    che.w=dis[cx][cy];
+                    st.insert(che);
+                }
+            }
+        }
+    }
+
+    return -1;
+}
