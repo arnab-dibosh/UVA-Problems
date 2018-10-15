@@ -1,0 +1,84 @@
+#include <bits/stdc++.h>
+#define Max_Node 50000
+using namespace std;
+int mst();
+int findPar(int n);
+
+struct edge{
+    int u, v, w;
+
+    bool operator <(const edge& x)const
+    {
+        return w<x.w;
+    }
+};
+vector<edge> edgeList;
+int par[Max_Node], started=0;
+
+int main()
+{
+    map<string, int> mymap;
+    int t=0;
+    cin>>t;
+    while(t--)
+    {
+        int n, m, id=0, cst=0;
+        string u, v;
+        edge e;
+
+        cin>>n;
+        cin>>m;
+
+        for(int i=1; i<=n; i++) par[i]=i;
+        edgeList.clear();
+        mymap.clear();
+
+        while(m--)
+        {
+            cin>>u>>v>>e.w;
+
+            if(mymap[u]) e.u=mymap[u];
+            else mymap[u]=e.u=++id;
+
+            if(mymap[v]) e.v=mymap[v];
+            else mymap[v]=e.v=++id;
+
+            edgeList.push_back(e);
+        }
+
+        cst=mst();
+        if(started) cout<<endl;
+        started=1;
+        cout<<cst<<endl;
+    }
+
+
+}
+
+int mst()
+{
+    int cst=0;
+
+    sort(edgeList.begin(), edgeList.end());
+
+    for(int i=0; i<edgeList.size(); i++)
+    {
+        edge e=edgeList[i];
+        int paru=findPar(e.u);
+        int parv=findPar(e.v);
+
+        if(paru!=parv)
+        {
+            par[paru]=parv;
+            cst+=e.w;
+        }
+    }
+
+    return cst;
+}
+
+int findPar(int n)
+{
+    if(n==par[n]) return n;
+    else return par[n]= findPar(par[n]);
+}
