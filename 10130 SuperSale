@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+int knapsack(int i, int w);
+using namespace std;
+
+int dp[1010][32], wt[1010], p[1010], cap=0, n=0;
+int main()
+{
+    int t, pr, res;
+    cin>>t;
+
+    while(t--)
+    {
+        res=0;
+        cin>>n;
+
+        for(int i=1; i<=n; i++)
+            scanf("%d %d", &p[i], &wt[i]);
+        
+        cin>>pr;
+        while(pr--)
+        {
+            memset(dp, -1, sizeof(dp));
+            cin>>cap;
+            res+=knapsack(1, 0);
+        }
+        cout<<res<<endl;
+    }
+    return 0;
+}
+
+int knapsack(int i, int w)
+{
+    int profit1, profit2;
+    if(i>n || w>cap) return 0;
+
+    if(dp[i][w]!=-1) return dp[i][w];
+
+    if(w+wt[i]<=cap)
+    {
+        profit1=knapsack(i+1, w+wt[i])+p[i];
+        profit2=knapsack(i+1, w);
+        return dp[i][w]= max(profit1, profit2);
+    }
+    else return dp[i][w]= knapsack(i+1, w);
+}
+
+
+
