@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int arr[1010], n, m;
+ 
+bool satifies(int val)
+{
+    int rem=val, cont=m, curr=0;
+    for(int i=0; i<n; i++)
+    {
+        curr=arr[i];
+        if(cont<=0 || (cont<2 && curr>rem)) return false;
+ 
+        if(curr>=rem)
+        {
+            cont--;
+            if(curr==rem) rem=val;
+            else rem=val-curr;
+        }
+        else
+            rem-=curr;
+    }
+ 
+    return true;
+}
+int findans(int st, int en)
+{
+    int ans=0, mid=0;
+ 
+    while(st<=en)
+    {
+        mid=(st+en)/2;
+        if(satifies(mid))
+        {
+            ans=mid;
+            en=mid-1;
+        }
+        else
+            st=mid+1;
+    }
+ 
+    return ans;
+}
+ 
+int main()
+{
+    int val, ans;
+ 
+    while(scanf("%d %d", &n, &m)!=EOF)
+    {
+        int mm=0, sum=0;
+        for(int i=0; i<n; i++)
+        {
+            cin>>val;
+            arr[i]=val;
+            if(val>mm) mm=val;
+            sum+=val;
+        }
+        ans=findans(mm, sum);
+        cout<<ans<<endl;
+    }
+    return 0;
+}
+ 
