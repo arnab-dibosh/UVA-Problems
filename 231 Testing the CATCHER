@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int main()
+{
+    vector<int> vv;
+    vector<int> nlist;
+    int n, cnt=1;;
+    vv.push_back(INT_MIN);
+    while(scanf("%d", &n)!=EOF)
+    {
+        if(n>-1)
+        {
+            nlist.push_back(n);
+            vv.push_back(INT_MAX);
+        }
+        else
+        {
+            int ind=0, lis=0, val=0;
+            for(int i=nlist.size()-1; i>-1; i--)
+            {
+                val=nlist[i];
+                ind=upper_bound(vv.begin(), vv.end(), val)-vv.begin();
+                vv[ind]=val;
+                lis=max(ind, lis);
+            }
+            if(cnt>1) printf("\n");
+            printf("Test #%d:\n  maximum possible interceptions: %d\n", cnt++, lis);
+            vv.clear();
+            vv.push_back(INT_MIN);
+            nlist.clear();
+            scanf("%d", &n);
+            if(n==-1) break;
+            else
+            {
+                nlist.push_back(n);
+                vv.push_back(INT_MAX);
+            }
+        }
+    }
+    return 0;
+}
+ 
